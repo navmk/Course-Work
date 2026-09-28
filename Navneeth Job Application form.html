@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Job Application Form</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    max-width: 550px;
+    margin: 30px auto;
+  }
+
+  fieldset {
+    margin-bottom: 15px;
+    padding: 12px 18px;
+  }
+
+  legend {
+    font-weight: bold;
+  }
+
+  td.label {
+    width: 160px;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 4px;
+  }
+
+  .buttons {
+    text-align: right;
+  }
+
+  button {
+    padding: 6px 16px;
+    margin-left: 8px;
+  }
+
+input[type="radio"],
+input[type="checkbox"] {
+  width: auto;
+  padding: 0;
+  margin: 0 4px 0 0;
+  vertical-align: middle;
+}
+</style>
+</head>
+<body>
+
+<h1>Job Application Form</h1>
+
+<form>
+
+  <fieldset>
+    <legend>Personal Information</legend>
+    <table>
+      <tr>
+        <td class="label">Name</td>
+        <td><input type="text" name="name"></td>
+      </tr>
+      <tr>
+        <td class="label">Age</td>
+        <td><input type="number" name="age"></td>
+      </tr>
+      <tr>
+        <td class="label">Gender</td>
+        <td>
+          <input type="radio" name="gender" value="Female"> Female
+          <input type="radio" name="gender" value="Male"> Male
+        </td>
+      </tr>
+      <tr>
+        <td class="label">Password</td>
+        <td><input type="password" name="password"></td>
+      </tr>
+      <tr>
+        <td class="label">Retype Password</td>
+        <td><input type="password" name="password2"></td>
+      </tr>
+    </table>
+  </fieldset>
+
+  <fieldset>
+    <legend>Security Information</legend>
+    <table>
+      <tr>
+        <td class="label">Security Question</td>
+        <td>
+          <select name="secquestion">
+            <option>What is your favourite song?</option>
+            <option>What is your favourite book?</option>
+            <option>What is your favourite movie?</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">Security Answer</td>
+        <td><input type="text" name="secanswer"></td>
+      </tr>
+    </table>
+  </fieldset>
+
+  <fieldset>
+    <legend>Contact Information</legend>
+    <table>
+      <tr>
+        <td class="label">Email ID</td>
+        <td><input type="email" name="email"></td>
+      </tr>
+      <tr>
+        <td class="label">Home Phone Number</td>
+        <td><input type="tel" name="homephone"></td>
+      </tr>
+      <tr>
+        <td class="label">Office Phone Number</td>
+        <td><input type="tel" name="officephone"></td>
+      </tr>
+    </table>
+  </fieldset>
+
+  <fieldset>
+    <legend>Languages Known</legend>
+    <input type="checkbox" name="lang" value="Malayalam"> Malayalam
+    <input type="checkbox" name="lang" value="English"> English
+    <input type="checkbox" name="lang" value="Hindi"> Hindi
+  </fieldset>
+
+  <fieldset>
+    <legend>Application Documents</legend>
+    Upload CV: <input type="file" name="cv">
+  </fieldset>
+
+  <div class="buttons">
+    <button type="reset">Reset</button>
+    <button type="submit">Submit</button>
+  </div>
+
+</form>
+
+</body>
+</html>
