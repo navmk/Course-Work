@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSS Reference Hub</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <h1>Welcome to the CSS Reference Hub</h1>
+  <p>Pick a topic from the menu to look up properties, selectors, units and more.</p>
+  <div class="ticker">
+    <marquee scrollamount="5" onmouseover="this.stop()" onmouseout="this.start()">Properties &bull; Selectors &bull; Functions &bull; Animatable &bull; Aural &bull; Units &bull; Colors &bull; Default values &bull; Browser support &mdash; Happy styling!</marquee>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="menu" aria-label="CSS reference menu">
+    <h2>CSS Reference</h2>
+    <ul>
+      <li><a href="properties.html" target="content">CSS Properties Reference</a></li>
+      <li><a href="selectors.html" target="content">CSS Selectors Reference</a></li>
+      <li><a href="functions.html" target="content">CSS Functions Reference</a></li>
+      <li><a href="animatable.html" target="content">CSS Animatable Reference</a></li>
+      <li><a href="aural.html" target="content">CSS Aural Reference</a></li>
+      <li><a href="units.html" target="content">CSS Units</a></li>
+      <li><a href="colors.html" target="content">CSS Color Reference</a></li>
+      <li><a href="defaults.html" target="content">CSS Default Values</a></li>
+      <li><a href="support.html" target="content">CSS Browser Support</a></li>
+    </ul>
+  </nav>
+  <main class="content">
+    <iframe name="content" src="welcome.html" title="Selected CSS reference page"></iframe>
+  </main>
+</div>
+
+<script>
+document.querySelectorAll('.menu a').forEach(function(a){
+  a.addEventListener('click',function(){
+    document.querySelectorAll('.menu a').forEach(function(x){x.removeAttribute('aria-current')});
+    a.setAttribute('aria-current','page');
+  });
+});
+</script>
+</body>
+</html>
