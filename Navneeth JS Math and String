@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JavaScript String and Math Functions</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 700px; margin: 20px auto; padding: 0 15px; }
+  h1 { text-align: center; }
+  h2 { background: #2b6cb0; color: white; padding: 8px; }
+  .box { border: 1px solid #aaa; padding: 12px; margin-bottom: 10px; }
+  input, textarea { width: 100%; box-sizing: border-box; padding: 6px; margin: 4px 0; }
+  button { padding: 6px 12px; margin-top: 6px; }
+  .result { margin-top: 8px; font-weight: bold; color: #2b6cb0; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+
+<h1>JavaScript String and Math Functions</h1>
+
+<h2>String Functions</h2>
+
+<div class="box">
+  <b>Length</b>
+  <input id="t1" placeholder="Enter text">
+  <button onclick="getLength()">Find length</button>
+  <div class="result" id="r1"></div>
+</div>
+
+<div class="box">
+  <b>First and last occurrence / Search</b>
+  <input id="t2" placeholder="Enter text">
+  <input id="word" placeholder="Enter a word">
+  <button onclick="findWord()">First and last occurrence</button>
+  <button onclick="searchWord()">Search</button>
+  <div class="result" id="r2"></div>
+</div>
+
+<div class="box">
+  <b>Slice, substring, substr</b>
+  <input id="t3" placeholder="Enter text">
+  <input id="start" type="number" placeholder="Start index">
+  <input id="end" type="number" placeholder="End index (length for substr)">
+  <button onclick="doSlice()">slice</button>
+  <button onclick="doSubstring()">substring</button>
+  <button onclick="doSubstr()">substr</button>
+  <div class="result" id="r3"></div>
+</div>
+
+<div class="box">
+  <b>Replace a word</b>
+  <input id="t4" placeholder="Enter text">
+  <input id="oldWord" placeholder="Word to replace">
+  <input id="newWord" placeholder="New word">
+  <button onclick="replaceWord()">Replace</button>
+  <button onclick="replaceAll()">Replace all</button>
+  <div class="result" id="r4"></div>
+</div>
+
+<div class="box">
+  <b>Uppercase / Lowercase</b>
+  <input id="t5" placeholder="Enter text">
+  <button onclick="upper()">Uppercase</button>
+  <button onclick="lower()">Lowercase</button>
+  <div class="result" id="r5"></div>
+</div>
+
+<h2>Math Functions</h2>
+
+<div class="box">
+  <b>Power and square root</b>
+  <input id="base" type="number" placeholder="Base number">
+  <input id="exp" type="number" placeholder="Exponent">
+  <button onclick="power()">Power</button>
+  <button onclick="squareRoot()">Square root of base</button>
+  <div class="result" id="r6"></div>
+</div>
+
+<div class="box">
+  <b>Round, ceil, floor, absolute</b>
+  <input id="num" type="number" placeholder="Enter a number">
+  <button onclick="roundValues()">Round / Ceil / Floor</button>
+  <button onclick="absolute()">Absolute</button>
+  <div class="result" id="r7"></div>
+</div>
+
+<div class="box">
+  <b>Sine and cosine</b>
+  <input id="angle" type="number" placeholder="Angle in degrees">
+  <button onclick="trig()">Sin and Cos</button>
+  <div class="result" id="r8"></div>
+</div>
+
+<div class="box">
+  <b>Minimum and maximum</b>
+  <input id="list" placeholder="Numbers separated by commas">
+  <button onclick="minMax()">Min and Max</button>
+  <div class="result" id="r9"></div>
+</div>
+
+<div class="box">
+  <b>Random number</b>
+  <input id="rmin" type="number" placeholder="From">
+  <input id="rmax" type="number" placeholder="To">
+  <button onclick="randomNumber()">Generate</button>
+  <div class="result" id="r10"></div>
+</div>
+
+<script>
+  // get the text from an input box
+  function get(id) {
+    return document.getElementById(id).value;
+  }
+
+  // show a message in a result box
+  function show(id, message) {
+    document.getElementById(id).innerText = message;
+  }
+
+  // split text into words, ignoring spaces and punctuation like , . ! ?
+  function getWords(text) {
+    return text.split(/\s+/).filter(function (w) { return w != ""; }).map(function (w) {
+      return w.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, "");
+    });
+  }
+
+  // ----- String functions -----
+  function getLength() {
+    show("r1", "Length: " + get("t1").length);
+  }
+
+  function findWord() {
+    var words = getWords(get("t2")), word = get("word").trim();
+    if (words.length == 0 || word == "") { show("r2", "Enter text and a word."); return; }
+    var first = words.indexOf(word), last = words.lastIndexOf(word);
+    if (first == -1) { show("r2", '"' + word + '" was not found.'); return; }
+    show("r2", "First occurrence: word " + (first + 1) + "\nLast occurrence: word " + (last + 1));
+  }
+
+  function searchWord() {
+    var words = getWords(get("t2")), word = get("word").trim();
+    if (words.length == 0 || word == "") { show("r2", "Enter text and a word."); return; }
+    var positions = [];
+    words.forEach(function (w, i) { if (w == word) positions.push(i + 1); });
+    if (positions.length == 0) { show("r2", '"' + word + '" was not found.'); return; }
+    show("r2", '"' + word + '" found ' + positions.length + " time(s)\nAt word number: " + positions.join(", "));
+  }
+
+  function doSlice() {
+    show("r3", get("t3").slice(Number(get("start")), Number(get("end"))));
+  }
+
+  function doSubstring() {
+    show("r3", get("t3").substring(Number(get("start")), Number(get("end"))));
+  }
+
+  function doSubstr() {
+    show("r3", get("t3").substr(Number(get("start")), Number(get("end"))));
+  }
+
+  // Replace only the first match
+  function replaceWord() {
+    var text = get("t4"), oldW = get("oldWord"), newW = get("newWord");
+    if (text == "" || oldW == "") { show("r4", "Enter text and the word to replace."); return; }
+    var pos = text.indexOf(oldW);
+    if (pos == -1) { show("r4", '"' + oldW + '" was not found.'); return; }
+    show("r4", text.slice(0, pos) + newW + text.slice(pos + oldW.length));
+  }
+
+  // Replace every match
+  function replaceAll() {
+    var text = get("t4"), oldW = get("oldWord"), newW = get("newWord");
+    if (text == "" || oldW == "") { show("r4", "Enter text and the word to replace."); return; }
+    if (text.indexOf(oldW) == -1) { show("r4", '"' + oldW + '" was not found.'); return; }
+    show("r4", text.split(oldW).join(newW));
+  }
+
+  function upper() {
+    show("r5", get("t5").toUpperCase());
+  }
+
+  function lower() {
+    show("r5", get("t5").toLowerCase());
+  }
+
+  // ----- Math functions -----
+  function power() {
+    show("r6", Math.pow(Number(get("base")), Number(get("exp"))));
+  }
+
+  function squareRoot() {
+    show("r6", Math.sqrt(Number(get("base"))));
+  }
+
+  function roundValues() {
+    var n = Number(get("num"));
+    show("r7", "Round: " + Math.round(n) + "\nCeil: " + Math.ceil(n) + "\nFloor: " + Math.floor(n));
+  }
+
+  function absolute() {
+    show("r7", Math.abs(Number(get("num"))));
+  }
+
+  function trig() {
+    var radians = Number(get("angle")) * Math.PI / 180;
+    var sin = Math.sin(radians).toFixed(4).replace("-0.0000", "0.0000"); // avoid showing -0.0000
+    var cos = Math.cos(radians).toFixed(4).replace("-0.0000", "0.0000");
+    show("r8", "Sin: " + sin + "\nCos: " + cos);
+  }
+
+  function minMax() {
+    var numbers = get("list").split(",").map(Number);
+    show("r9", "Min: " + Math.min(...numbers) + "\nMax: " + Math.max(...numbers));
+  }
+
+  function randomNumber() {
+    var min = Number(get("rmin")), max = Number(get("rmax"));
+    show("r10", Math.floor(Math.random() * (max - min + 1)) + min);
+  }
+</script>
+
+</body>
+</html>
